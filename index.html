@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Northstar Auto Care &mdash; Guiding You to Great Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0d0d0d;
+      --charcoal: #1a1a1a;
+      --steel: #2c2c2c;
+      --iron: #3d3d3d;
+      --rust: #c0392b;
+      --rust-bright: #e74c3c;
+      --chrome: #d4d4d4;
+      --white: #f5f5f5;
+      --dim: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 4vw;
+      background: rgba(13,13,13,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--steel);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1.7rem; letter-spacing: 0.06em; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--rust); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { color: var(--chrome); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--rust-bright); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: 0.3s; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; padding: 8rem 4vw 4rem; gap: 2rem;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(192,57,43,0.12) 0%, transparent 70%),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(255,255,255,0.025) 80px);
+      pointer-events: none;
+    }
+    .hero-text { position: relative; }
+    .hero-badge { display: inline-block; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rust); border: 1px solid var(--rust); padding: 0.3rem 0.8rem; margin-bottom: 1.5rem; border-radius: 1px; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 6.5rem); line-height: 0.95; letter-spacing: 0.03em; color: var(--white); margin-bottom: 1.5rem; }
+    .hero-title em { font-style: normal; color: var(--rust); display: block; }
+    .hero-sub { font-size: 1rem; color: var(--dim); line-height: 1.7; max-width: 420px; margin-bottom: 2.5rem; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--rust); color: var(--white); padding: 0.85rem 2rem; font-family: var(--font-body); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: background 0.2s, transform 0.15s; display: inline-block; }
+    .btn-primary:hover { background: var(--rust-bright); transform: translateY(-2px); }
+    .btn-outline { border: 1px solid var(--iron); color: var(--chrome); padding: 0.85rem 2rem; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: border-color 0.2s, color 0.2s, transform 0.15s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--chrome); color: var(--white); transform: translateY(-2px); }
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+    .engine-art { width: min(400px, 90%); aspect-ratio: 1; }
+    .engine-art svg { width: 100%; height: 100%; opacity: 0.85; }
+
+    /* TICKER */
+    .ticker-wrap { overflow: hidden; background: var(--rust); padding: 0.65rem 0; white-space: nowrap; }
+    .ticker { display: inline-flex; animation: ticker 28s linear infinite; }
+    .ticker-item { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.12em; padding: 0 2.5rem; color: var(--white); }
+    .ticker-item::after { content: '\25C6'; margin-left: 2.5rem; opacity: 0.5; }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SHARED */
+    section { padding: 6rem 4vw; }
+    .section-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.75rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4.5vw, 3.8rem); letter-spacing: 0.04em; line-height: 1; color: var(--white); margin-bottom: 1.5rem; }
+
+    /* SERVICES */
+    #services { background: var(--charcoal); }
+    .services-header { max-width: 550px; margin-bottom: 3.5rem; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; }
+    .service-card { background: var(--black); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.25s; }
+    .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--rust); transition: width 0.35s ease; }
+    .service-card:hover { background: var(--steel); }
+    .service-card:hover::after { width: 100%; }
+    .service-name { font-family: var(--font-display); font-size: 2rem; letter-spacing: 0.05em; color: var(--white); }
+
+    /* WHY */
+    #why { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .why-list { list-style: none; margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+    .why-item { display: flex; gap: 1.25rem; align-items: flex-start; padding-bottom: 1.5rem; border-bottom: 1px solid var(--steel); }
+    .why-item:last-child { border-bottom: none; }
+    .why-num { font-family: var(--font-display); font-size: 2.2rem; color: var(--rust); line-height: 1; flex-shrink: 0; width: 2.5rem; }
+    .why-item-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; color: var(--chrome); }
+    .why-item-desc { font-size: 0.83rem; color: var(--dim); line-height: 1.6; }
+    .why-visual { background: var(--charcoal); border: 1px solid var(--steel); border-radius: 3px; padding: 3rem; }
+    .why-visual-title { font-family: var(--font-display); font-size: 1.2rem; color: var(--dim); letter-spacing: 0.08em; margin-bottom: 2rem; text-transform: uppercase; }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table td { padding: 0.65rem 0; font-size: 0.85rem; border-bottom: 1px solid var(--steel); color: var(--chrome); }
+    .hours-table td:last-child { text-align: right; color: var(--dim); }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .hours-table .highlight td { color: var(--white); font-weight: 500; }
+    .hours-table .closed td:last-child { color: var(--rust); }
+    .why-address { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--steel); font-size: 0.85rem; color: var(--dim); line-height: 1.8; }
+    .why-address strong { color: var(--chrome); font-weight: 500; display: block; margin-bottom: 0.3rem; }
+    .why-address a { color: var(--dim); text-decoration: none; transition: color 0.2s; }
+    .why-address a:hover { color: var(--rust-bright); }
+
+    /* FOOTER */
+    footer { background: var(--charcoal); border-top: 1px solid var(--steel); padding: 3rem 4vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--white); }
+    .footer-logo span { color: var(--rust); }
+    .footer-copy { font-size: 0.75rem; color: var(--iron); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.75rem; color: var(--dim); text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--rust-bright); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* MOBILE */
+    @media (max-width: 800px) {
+      #hero { grid-template-columns: 1fr; padding-top: 7rem; }
+      .hero-visual { display: none; }
+      #why { grid-template-columns: 1fr; gap: 3rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 0; right: 0; bottom: 0; width: 240px; background: var(--charcoal); padding: 5rem 2rem 2rem; gap: 1.5rem; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Northstar<span> Auto Care</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#why">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text reveal">
+    <span class="hero-badge">Guiding you to great service</span>
+    <h1 class="hero-title">Your Car,<em>Our Priority.</em></h1>
+    <p class="hero-sub">Northstar Auto Care is here for all your auto service needs. From engine and transmission to brakes and everything in between &mdash; we have you covered. Stop in and see us!</p>
+    <div class="hero-btns">
+      <a href="tel:8102333441" class="btn-primary">Call Us: 810-233-3441</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="engine-art">
+      <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="200" cy="200" r="180" stroke="#2c2c2c" stroke-width="1"/>
+        <circle cx="200" cy="200" r="140" stroke="#3d3d3d" stroke-width="1"/>
+        <circle cx="200" cy="200" r="80" stroke="#c0392b" stroke-width="2.5"/>
+        <circle cx="200" cy="200" r="30" fill="#1a1a1a" stroke="#c0392b" stroke-width="2"/>
+        <g stroke="#c0392b" stroke-width="3" stroke-linecap="round">
+          <line x1="200" y1="110" x2="200" y2="90"/>
+          <line x1="200" y1="310" x2="200" y2="290"/>
+          <line x1="110" y1="200" x2="90" y2="200"/>
+          <line x1="310" y1="200" x2="290" y2="200"/>
+          <line x1="143" y1="143" x2="129" y2="129"/>
+          <line x1="257" y1="257" x2="271" y2="271"/>
+          <line x1="257" y1="143" x2="271" y2="129"/>
+          <line x1="143" y1="257" x2="129" y2="271"/>
+        </g>
+        <circle cx="310" cy="140" r="45" stroke="#3d3d3d" stroke-width="2"/>
+        <circle cx="310" cy="140" r="16" fill="#1a1a1a" stroke="#3d3d3d" stroke-width="2"/>
+        <g stroke="#888" stroke-width="2" stroke-linecap="round">
+          <line x1="310" y1="90" x2="310" y2="80"/>
+          <line x1="310" y1="200" x2="310" y2="190"/>
+          <line x1="260" y1="140" x2="250" y2="140"/>
+          <line x1="360" y1="140" x2="370" y2="140"/>
+        </g>
+        <circle cx="120" cy="290" r="38" stroke="#3d3d3d" stroke-width="1.5"/>
+        <circle cx="120" cy="290" r="13" fill="#1a1a1a" stroke="#3d3d3d" stroke-width="1.5"/>
+        <g stroke="#555" stroke-width="1.5" stroke-linecap="round">
+          <line x1="120" y1="248" x2="120" y2="240"/>
+          <line x1="120" y1="340" x2="120" y2="332"/>
+          <line x1="78" y1="290" x2="70" y2="290"/>
+          <line x1="162" y1="290" x2="170" y2="290"/>
+        </g>
+        <line x1="200" y1="200" x2="310" y2="140" stroke="#c0392b" stroke-width="1" stroke-dasharray="4 4" opacity="0.4"/>
+        <line x1="200" y1="200" x2="120" y2="290" stroke="#888" stroke-width="1" stroke-dasharray="4 4" opacity="0.3"/>
+        <circle cx="200" cy="200" r="8" fill="#c0392b" opacity="0.9"/>
+        <circle cx="200" cy="200" r="3" fill="#f5f5f5"/>
+        <path d="M 60 200 A 140 140 0 0 1 200 60" stroke="#2c2c2c" stroke-width="1" fill="none" stroke-dasharray="6 6"/>
+        <path d="M 340 200 A 140 140 0 0 1 200 340" stroke="#2c2c2c" stroke-width="1" fill="none" stroke-dasharray="6 6"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span class="ticker-item">Engine Repair</span>
+    <span class="ticker-item">Transmission</span>
+    <span class="ticker-item">Brake Service</span>
+    <span class="ticker-item">Engine Repair</span>
+    <span class="ticker-item">Transmission</span>
+    <span class="ticker-item">Brake Service</span>
+    <span class="ticker-item">Engine Repair</span>
+    <span class="ticker-item">Transmission</span>
+    <span class="ticker-item">Brake Service</span>
+    <span class="ticker-item">Engine Repair</span>
+    <span class="ticker-item">Transmission</span>
+    <span class="ticker-item">Brake Service</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">Full-Service Auto Repair</h2>
+    <p style="color:var(--dim);font-size:0.9rem;line-height:1.7;">We service all your vehicle needs. From engine and transmission to brakes and everything else &mdash; Northstar Auto Care has you covered.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-name">Engine Repair</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-name">Transmission</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-name">Brakes</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / WHY -->
+<section id="why">
+  <div class="reveal">
+    <p class="section-label">Why Northstar</p>
+    <h2 class="section-title">No Surprises.<br>Just Results.</h2>
+    <ul class="why-list">
+      <li class="why-item">
+        <span class="why-num">01</span>
+        <div>
+          <div class="why-item-title">Experienced Technicians</div>
+          <p class="why-item-desc">Our mechanics have the skills and tools to handle any make or model, foreign or domestic.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-num">02</span>
+        <div>
+          <div class="why-item-title">Transparent Pricing</div>
+          <p class="why-item-desc">You approve every job before we start. No hidden fees, no upsells &mdash; ever.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-num">03</span>
+        <div>
+          <div class="why-item-title">All Vehicle Needs Covered</div>
+          <p class="why-item-desc">Engine, transmission, brakes, and everything else &mdash; one shop for every service your vehicle needs.</p>
+        </div>
+      </li>
+      <li class="why-item">
+        <span class="why-num">04</span>
+        <div>
+          <div class="why-item-title">Convenient Hours</div>
+          <p class="why-item-desc">Open Monday through Friday, 8 AM to 5 PM. Stop in &mdash; we are ready to help.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="why-visual reveal">
+    <div class="why-visual-title">Hours &amp; Contact</div>
+    <table class="hours-table">
+      <tr class="highlight"><td>Monday &ndash; Friday</td><td>8:00 AM &ndash; 5:00 PM</td></tr>
+      <tr class="closed"><td>Saturday</td><td>Closed</td></tr>
+      <tr class="closed"><td>Sunday</td><td>Closed</td></tr>
+    </table>
+    <div class="why-address">
+      <strong>&#128205; Find Us</strong>
+      5159 Fenton Road<br>
+      Flint, MI 48507<br><br>
+      <strong>&#128222; Call Us</strong>
+      <a href="tel:8102333441">810-233-3441</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Northstar<span> Auto Care</span></div>
+  <p class="footer-copy">&copy; 2025 Northstar Auto Care. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#why">About</a>
+    <a href="#why">Contact</a>
+  </div>
+</footer>
+
+<script>
+  var hamburger = document.getElementById('hamburger');
+  var navLinks = document.getElementById('navLinks');
+  hamburger.addEventListener('click', function() { navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() { navLinks.classList.remove('open'); });
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e, i) {
+      if (e.isIntersecting) {
+        setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>
